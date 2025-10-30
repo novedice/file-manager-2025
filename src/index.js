@@ -26,7 +26,7 @@ rl.addListener('close', () => {
   console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
 });
 
-rl.addListener('line', (input) => {
+rl.addListener('line', async (input) => {
 switch (input) {
   case '.exit':
     rl.close();
@@ -34,18 +34,21 @@ switch (input) {
 
   case 'up':
     console.log('up');
-    changingDir(curDir.slice(0,curDir.lastIndexOf('/')));
+    changingDir('..');
     break;
 
   case 'ls':
     console.log('ls');
-    listOfFiles(process.cwd())
+    const list = await listOfFiles(process.cwd());
     break;
 
 }
 if (input.includes('cd')) {
 
-  changingDir(path.join(homeDir, '/Desktop'))
+  // changingDir(input.split(' ')[1])
+  console.log('path: ', input.split(' '));
+  console.log(path.resolve(process.cwd(), input.split(' ')[1]))
+  process.chdir(path.resolve(process.cwd(), input.split(' ')[1]));
 }
 })
 
