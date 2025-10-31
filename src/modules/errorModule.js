@@ -1,3 +1,5 @@
-export const throwError = (err) => {
-  console.log(err)
+export const throwError = () => {
+  // throw new Error("Operation failed");
+  console.log('Operation failed')
+  
 }

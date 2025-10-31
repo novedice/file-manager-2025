@@ -1,6 +1,5 @@
 import fsPromises from 'node:fs/promises';
 import { throwError } from './errorModule.js';
-import { Dirent } from 'node:fs';
 
 export const listOfFiles = async (path) => {
   try {
@@ -18,7 +17,7 @@ export const listOfFiles = async (path) => {
     console.table(listForPrint,[ 'name', 'type'] );
     return listForPrint
   }
-  catch (err) {
-    throwError(err)
+  catch {
+    throwError()
   }
 }

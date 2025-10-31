@@ -7,6 +7,10 @@ import readline from "node:readline/promises";
 import { listOfFiles } from "./modules/list.js";
 import path from "node:path";
 import { changingDir } from "./modules/changeDir.js";
+import {  readingFile } from "./modules/cat.js";
+import { parsingInput } from "./modules/parsingInput.js";
+import { addDir } from "./modules/addDir.js";
+import { addFile } from "./modules/addFile.js";
 
 let curDir;
 const args = process.argv.slice(2);
@@ -27,29 +31,51 @@ rl.addListener('close', () => {
 });
 
 rl.addListener('line', async (input) => {
-switch (input) {
-  case '.exit':
-    rl.close();
-    break;
+  const trimmedInput = input.trim();
+  switch (true) {
+    case trimmedInput === '.exit':
+      rl.close();
+      break;
 
-  case 'up':
-    console.log('up');
-    changingDir('..');
-    break;
+    case trimmedInput === 'up':
+      console.log('up');
+      changingDir('..');
+      break;
 
-  case 'ls':
-    console.log('ls');
-    const list = await listOfFiles(process.cwd());
-    break;
+    case trimmedInput === 'ls':
+      console.log('ls');
+      const list = await listOfFiles(process.cwd());
+      break;
+  
+    case trimmedInput.includes('cd'): 
+      changingDir(parsingInput(trimmedInput));
+      break;
 
-}
-if (input.includes('cd')) {
+    case trimmedInput.includes('cat'):
+      readingFile(parsingInput(trimmedInput));
+      break;
 
-  // changingDir(input.split(' ')[1])
-  console.log('path: ', input.split(' '));
-  console.log(path.resolve(process.cwd(), input.split(' ')[1]))
-  process.chdir(path.resolve(process.cwd(), input.split(' ')[1]));
-}
+    case trimmedInput.includes('mkdir'):
+      addDir(parsingInput(trimmedInput));
+      break;
+
+    case trimmedInput.includes('add'):
+      addFile(parsingInput(trimmedInput));
+      break;
+  
+    case trimmedInput.includes('rn'):
+      break;
+    
+    case trimmedInput.includes('cp'):
+      break;
+
+    case trimmedInput.includes('mv'):
+      break;
+
+    case trimmedInput.includes('rm'):
+      break;
+
+  }
 })
 
 
