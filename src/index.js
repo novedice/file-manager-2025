@@ -16,6 +16,9 @@ import { cpFile } from "./modules/cpFile.js";
 import { delFile } from "./modules/deleteFile.js";
 import { moveFile } from "./modules/moveFile.js";
 import { invalidInputMes } from "./modules/invalidInput.js";
+import { compressFile } from "./modules/compressFile.js";
+import { deCompressFile } from "./modules/decompress.js";
+
 
 let curDir;
 const args = process.argv.slice(2);
@@ -89,6 +92,16 @@ rl.addListener('line', async (input) => {
 
     case trimmedInput.includes('rm'):
       delFile(parsingInput(trimmedInput));
+      currentWorkingDir();
+      break;
+
+    case trimmedInput.includes('compress'):
+      compressFile(parsingInput(trimmedInput));
+      currentWorkingDir();
+      break;
+
+    case trimmedInput.includes('decompress'):
+      deCompressFile(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
 
