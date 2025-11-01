@@ -19,6 +19,7 @@ import { invalidInputMes } from "./modules/invalidInput.js";
 import { compressFile } from "./modules/compressFile.js";
 import { deCompressFile } from "./modules/decompress.js";
 import { osInfo } from "./modules/osInfo.js";
+import { calcHash } from "./modules/calcHash.js";
 
 
 let curDir;
@@ -103,6 +104,11 @@ rl.addListener('line', async (input) => {
 
     case trimmedInput.includes('decompress'):
       deCompressFile(parsingInput(trimmedInput));
+      currentWorkingDir();
+      break;
+
+    case trimmedInput.includes('hash'):
+      await calcHash(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
 
