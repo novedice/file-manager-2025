@@ -5,8 +5,6 @@ export const findPass = (directory, file='', __fileName='') => {
   if (__fileName === '') {
     __fileName = fileURLToPath(import.meta.url)
   }
-  console.log('fileName in helper: ', __fileName);
-  // const __fileName = fileURLToPath(import.meta.url);        
   const __dirName = path.dirname(__fileName);
 
   return path.join(__dirName, directory, file);

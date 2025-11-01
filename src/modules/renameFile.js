@@ -1,4 +1,3 @@
-import { currentWorkingDir } from "./currentDir.js";
 import { throwError } from "./errorModule.js"
 import fsPromises from 'node:fs/promises';
 import path from 'node:path';

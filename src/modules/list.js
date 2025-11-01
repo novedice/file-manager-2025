@@ -1,6 +1,5 @@
 import fsPromises from 'node:fs/promises';
 import { throwError } from './errorModule.js';
-import { currentWorkingDir } from './currentDir.js';
 
 export const listOfFiles = async (path) => {
   try {

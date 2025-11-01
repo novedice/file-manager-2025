@@ -1,5 +1,4 @@
 import path from 'node:path';
-import { currentWorkingDir } from "./currentDir.js";
 import { throwError } from "./errorModule.js";
 
 export const changingDir = (input) => {

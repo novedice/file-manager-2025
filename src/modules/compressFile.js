@@ -12,8 +12,8 @@ export const compressFile = async (input) => {
     const zlibBrotliCompress = zlib.createBrotliCompress()
 
     reader.pipe(zlibBrotliCompress).pipe(writer);
-    // console.log('done');
-  } catch (e) {
+    
+  } catch {
     throwError();
   }
 }

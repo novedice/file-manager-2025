@@ -12,7 +12,7 @@ export const deCompressFile = async (input) => {
     const zlibBrotliCompress = zlib.createBrotliDecompress();
 
     reader.pipe(zlibBrotliCompress).pipe(writer);
-    // console.log('done dec');
+    
   } catch {
     throwError();
   }
