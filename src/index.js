@@ -18,6 +18,7 @@ import { moveFile } from "./modules/moveFile.js";
 import { invalidInputMes } from "./modules/invalidInput.js";
 import { compressFile } from "./modules/compressFile.js";
 import { deCompressFile } from "./modules/decompress.js";
+import { osInfo } from "./modules/osInfo.js";
 
 
 let curDir;
@@ -105,9 +106,22 @@ rl.addListener('line', async (input) => {
       currentWorkingDir();
       break;
 
+    // case JSON.stringify(input).includes('os'):
+    //   console.log('RAW INPUT:', JSON.stringify(input));
+    //   osInfo(input);
+    //   break;
+    case input.toString().includes('os'):
+      break;
+
     default:
       invalidInputMes();
       currentWorkingDir();
-}})
+
+   
+  }
+   if (input.toString().includes('os')){
+      osInfo(input.toString());
+    }
+})
 
 
