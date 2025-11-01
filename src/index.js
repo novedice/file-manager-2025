@@ -11,6 +11,11 @@ import {  readingFile } from "./modules/cat.js";
 import { parsingInput } from "./modules/parsingInput.js";
 import { addDir } from "./modules/addDir.js";
 import { addFile } from "./modules/addFile.js";
+import { renameFile } from "./modules/renameFile.js";
+import { cpFile } from "./modules/cpFile.js";
+import { delFile } from "./modules/deleteFile.js";
+import { moveFile } from "./modules/moveFile.js";
+import { invalidInputMes } from "./modules/invalidInput.js";
 
 let curDir;
 const args = process.argv.slice(2);
@@ -38,44 +43,58 @@ rl.addListener('line', async (input) => {
       break;
 
     case trimmedInput === 'up':
-      console.log('up');
       changingDir('..');
+      currentWorkingDir();
       break;
 
     case trimmedInput === 'ls':
-      console.log('ls');
       const list = await listOfFiles(process.cwd());
+      currentWorkingDir();
       break;
   
     case trimmedInput.includes('cd'): 
       changingDir(parsingInput(trimmedInput));
+      currentWorkingDir();
       break;
 
     case trimmedInput.includes('cat'):
       readingFile(parsingInput(trimmedInput));
+      currentWorkingDir();
       break;
 
     case trimmedInput.includes('mkdir'):
       addDir(parsingInput(trimmedInput));
+      currentWorkingDir();
       break;
 
     case trimmedInput.includes('add'):
       addFile(parsingInput(trimmedInput));
+      currentWorkingDir();
       break;
   
     case trimmedInput.includes('rn'):
+      renameFile(parsingInput(trimmedInput))
+      currentWorkingDir();
       break;
     
     case trimmedInput.includes('cp'):
+      cpFile(parsingInput(trimmedInput));
+      currentWorkingDir();
       break;
 
     case trimmedInput.includes('mv'):
+      moveFile(parsingInput(trimmedInput))
+      currentWorkingDir();
       break;
 
     case trimmedInput.includes('rm'):
+      delFile(parsingInput(trimmedInput));
+      currentWorkingDir();
       break;
 
-  }
-})
+    default:
+      invalidInputMes();
+      currentWorkingDir();
+}})
 
 
