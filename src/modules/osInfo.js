@@ -3,7 +3,6 @@ import { throwError } from "./errorModule.js"
 import { invalidInputMes } from './invalidInput.js';
 
 export const osInfo = (input) => {
-  // console.log('1:',input);
   try {
     const arg = input.split(' ').filter(arg => arg !== '').slice(1)[0];
     switch (arg) {
@@ -12,9 +11,8 @@ export const osInfo = (input) => {
         break;
       
       case '--cpus':
-        console.log('cpus');
         const osCpus = os.cpus();
-        console.log(osCpus.length);
+        console.log(`overall amount of CPUS is ${osCpus.length}`);
         for (let i=0; i<osCpus.length; i++) {
           console.log(`${i+1}. ${osCpus[i].model}, ${osCpus[i].speed/1000}GHz `)
         }

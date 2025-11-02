@@ -1,11 +1,8 @@
 import { parseUserName } from "./modules/parseUserName.js";
-import { findPass } from "./modules/helperWithPasses.js";
-import { fileURLToPath } from 'node:url';
 import { currentWorkingDir } from "./modules/currentDir.js";
 import { findHomeDir } from "./modules/homeDir.js";
 import readline from "node:readline/promises";
 import { listOfFiles } from "./modules/list.js";
-import path from "node:path";
 import { changingDir } from "./modules/changeDir.js";
 import {  readingFile } from "./modules/cat.js";
 import { parsingInput } from "./modules/parsingInput.js";
@@ -41,6 +38,11 @@ rl.addListener('close', () => {
 });
 
 rl.addListener('line', async (input) => {
+
+  if (input.toString().includes('os')){
+      osInfo(input.toString());
+    } else {
+
   const trimmedInput = input.trim();
   switch (true) {
     case trimmedInput === '.exit':
@@ -63,47 +65,47 @@ rl.addListener('line', async (input) => {
       break;
 
     case trimmedInput.includes('cat'):
-      readingFile(parsingInput(trimmedInput));
+      await readingFile(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
 
     case trimmedInput.includes('mkdir'):
-      addDir(parsingInput(trimmedInput));
+      await addDir(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
 
     case trimmedInput.includes('add'):
-      addFile(parsingInput(trimmedInput));
+      await addFile(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
   
     case trimmedInput.includes('rn'):
-      renameFile(parsingInput(trimmedInput))
+      await renameFile(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
     
     case trimmedInput.includes('cp'):
-      cpFile(parsingInput(trimmedInput));
+      await cpFile(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
 
     case trimmedInput.includes('mv'):
-      moveFile(parsingInput(trimmedInput))
+      await moveFile(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
 
     case trimmedInput.includes('rm'):
-      delFile(parsingInput(trimmedInput));
+      await delFile(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
 
     case trimmedInput.includes('compress'):
-      compressFile(parsingInput(trimmedInput));
+      await compressFile(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
 
     case trimmedInput.includes('decompress'):
-      deCompressFile(parsingInput(trimmedInput));
+      await deCompressFile(parsingInput(trimmedInput));
       currentWorkingDir();
       break;
 
@@ -116,18 +118,17 @@ rl.addListener('line', async (input) => {
     //   console.log('RAW INPUT:', JSON.stringify(input));
     //   osInfo(input);
     //   break;
-    case input.toString().includes('os'):
-      break;
+    // case input.toString().includes('os'):
+    //   const os = 'os';
+    //   console.log('os!!!!!!');
+    //   break;
 
     default:
       invalidInputMes();
       currentWorkingDir();
-
    
-  }
-   if (input.toString().includes('os')){
-      osInfo(input.toString());
-    }
+  }}
+   
 })
 
 
