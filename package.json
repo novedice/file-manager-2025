@@ -1,0 +1,24 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": ">=22.14.0"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:n": "node src/index.js --username=your_username"
+  },
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novedice/file-manager-2025"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "novedice",
+  "license": "ISC",
+  "homepage": "https://github.com/novedice/file-manager-2025#readme"
+}
+
